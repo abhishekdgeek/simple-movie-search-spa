@@ -1,1 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="simpleMovieSearchApp" ng-controller="SearchController">
 
+<head>
+    <title ng-bind="title"></title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+</head>
+
+<body>
+
+    <noscript>
+        <div class="alert alert-danger text-center">Javascript is either disabled or not supported in your browser. Please enable it or use a Javascript enabled browser.</div>
+    </noscript>
+
+    <header>
+        <div class="container outerdiv">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3">
+                    <div id="logo" class="text-center">
+                        <h1>{{::title}}</h1>
+                        <p>{{::tagline}}</p>
+                    </div>
+                    <form role="form" id="search-form" ng-submit="fetchData()">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input ng-model="search" ng-model-options="{ debounce: 1000 }" class="form-control" type="text" name="search" placeholder="Search..." autofocus/>
+                                <span class="input-group-btn"><button class="btn" type="submit"><i class="glyphicon glyphicon-search" aria-hidden="true"></i> Search </button></span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </header>
+ 
+    <div class="container-fluid outerdiv">
+        <div ng-if="searchResults.Response!=='False'" id="search-results" ng-include="'partials/search-results.html'" class="col-md-12"></div>
+        <div ng-if="searchResults.Response==='False'" id="search-results" class="col-md-12">
+            <div class="alert alert-info text-center">No movie found with name - '{{::search}}'.</div>
+        </div>
+    </div>
+    <footer>
+        <nav class="navbar navbar-inverse navbar-fixed-bottom">
+            <div class="container-fluid">
+                <div class="navbar-footer">
+                    <a class="navbar-brand" href="#"><b>{{::title}}</b> <span class="span-style">{{::tagline}}</span></a>
+                </div>
+            </div>
+        </nav>
+    </footer>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.4/angular.min.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>
