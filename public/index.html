@@ -33,14 +33,20 @@
                     </form>
                 </div>
             </div>
+            <div ng-if="error" class="row">
+                <div class="col-md-12">
+                    <div class="alert alert-danger text-center">Something went wrong!</div>
+                </div>
+            </div>
         </div>
     </header>
  
+
     <div class="container-fluid outerdiv">
         <div ng-if="!search" class="col-md-12">
             <div class="alert alert-info text-center">Start typing to search IMDB at blazing speed!</div>
         </div>
-        <div ng-if="searchResults.Response!=='False'" id="search-results" ng-include="'partials/search-results.html'" class="col-md-12"></div>
+        <div ng-if="searchResults.Response!=='False'" id="search-results" ng-include="'partials/search-results.html'"></div>
         <div ng-if="searchResults.Response==='False'" id="search-results" class="col-md-12">
             <div class="alert alert-info text-center">No movie found with name - '{{::search}}'.</div>
         </div>

@@ -49,6 +49,7 @@ angular.module('simpleMovieSearchApp', [])
             } else {
                 $scope.pageNumber = 1;
             }
+            $scope.error = 0;
             $http.get("//www.omdbapi.com/?type=movie&s=" + $scope.search + '&page=' + $scope.pageNumber)
                 .then(function(response) {
                     // Reset inProgress flag
@@ -61,8 +62,9 @@ angular.module('simpleMovieSearchApp', [])
                         $scope.totalResults = response.data.totalResults;
                     }
                 }, function(error) {
-                    // TODO - Show error message to user.
-                    console.log(error);
+                    $scope.inProgress = 0;
+                    $scope.pageNumber--;
+                    $scope.error = 1;
                 });
         }
 
@@ -73,13 +75,11 @@ angular.module('simpleMovieSearchApp', [])
 
 
         // function to help in pagination.
-        $scope.loadMore = function() {
+        $scope.loadMore = function() { console.log('loadMore')
             if (!$scope.inProgress) {
                 $scope.inProgress = 1;
                 if ($scope.totalResults / 10 > $scope.pageNumber) {
                     $scope.fetchData(1);
-                } else {
-                    // TODO - Show message about end of page and there is no need of any pagination now.
                 }
             }
         };

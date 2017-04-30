@@ -56,7 +56,7 @@ body {
 }
 
 .search-result .well {
-    height: 480px;
+    height: 420px;
     cursor: pointer;
 }
 
@@ -81,8 +81,24 @@ body {
 
 .poster-image img {
     width: 100%;
-    height: 400px;
+    height: 350px;
     margin-left: auto;
     margin-right: auto;
     object-fit: cover;
+}
+
+.alert-info {
+    color: #262626;
+    background-color: #8d979b;
+    border-color: #c9cacb;
+}
+
+
+@media only screen and (min-width: 480px) {
+    .search-result .well {
+        height: 480px;
+    }
+    .poster-image img {
+        height: 400px;
+    }
 }
