@@ -38,13 +38,16 @@ angular.module('simpleMovieSearchApp', [])
             }
         });
 
-        var loader = {
-            Poster: "images/fetching.gif",
-            Title: "",
-            Type: "movie",
-            Year: "",
-            imdbID: "#"
+        var itemObject = function (Poster, Title, Type, Year, imdbID) {
+            this.Poster = Poster;
+            this.Title = Title;
+            this.Year = Year;
+            this.Year = Year;
+            this.imdbID = imdbID;
         }
+
+        var loader = new itemObject("images/fetching.gif", "", "movie", "", null);
+        var theEnd = new itemObject("images/the-end.png", "", "movie", "", null);
 
         // Uncomment the following to search for some default text.
         // $scope.search = "Batman";
@@ -93,6 +96,9 @@ angular.module('simpleMovieSearchApp', [])
                 if ($scope.totalResults / 10 > $scope.pageNumber) {
                     $scope.searchResults.Search.push(loader);
                     $scope.fetchData(1);
+                } else {
+                    // Push the end object.
+                    $scope.searchResults.Search.push(theEnd);
                 }
             }
         };

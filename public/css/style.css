@@ -89,8 +89,9 @@ body {
 
 .alert-info {
     color: #262626;
-    background-color: #8d979b;
+    background-color: #c0c0c0;
     border-color: #c9cacb;
+    font-weight: 300;
 }
 
 

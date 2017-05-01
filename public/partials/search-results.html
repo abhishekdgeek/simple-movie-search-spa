@@ -2,7 +2,7 @@
     <div class="search-result col-md-3 col-sm-4 col-xs-12" ng-repeat="movie in searchResults.Search">
         <div class="well" ng-click="openImdbLink(movie.imdbID)">
             <div class="poster-image">
-                <img ng-if="movie.Poster!=='N/A'" class="img-responsive" ng-src="{{::movie.Poster}}" alt="{{::movie.Title }}">
+                <img ng-if="movie.Poster!=='N/A'" class="img-responsive" src="{{::movie.Poster}}" alt="{{::movie.Title }}">
                 <img ng-if="movie.Poster==='N/A'" class="img-responsive" src="images/no-poster-available.jpg" alt="{{::movie.Title }}">
             </div>
             <div>
