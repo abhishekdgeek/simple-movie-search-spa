@@ -38,6 +38,14 @@ angular.module('simpleMovieSearchApp', [])
             }
         });
 
+        var loader = {
+            Poster: "images/fetching.gif",
+            Title: "",
+            Type: "movie",
+            Year: "",
+            imdbID: "#"
+        }
+
         // Uncomment the following to search for some default text.
         // $scope.search = "Batman";
 
@@ -56,12 +64,14 @@ angular.module('simpleMovieSearchApp', [])
                     $scope.inProgress = 0;
                     if (paginate) {
                         // Update searchResults with new data from API.
+                        $scope.searchResults.Search.pop();
                         $scope.searchResults.Search = $scope.searchResults.Search.concat(response.data.Search);
                     } else {
                         $scope.searchResults = response.data;
                         $scope.totalResults = response.data.totalResults;
                     }
                 }, function(error) {
+                    $scope.searchResults.Search.pop();
                     $scope.inProgress = 0;
                     $scope.pageNumber--;
                     $scope.error = 1;
@@ -70,15 +80,18 @@ angular.module('simpleMovieSearchApp', [])
 
         // function to open IMDB link in new tab
         $scope.openImdbLink = function(imdbId) {
-            $window.open('http://www.imdb.com/title/' + imdbId, '_blank');
+            if (imdbId) {
+                $window.open('http://www.imdb.com/title/' + imdbId, '_blank');
+            }
         };
 
 
         // function to help in pagination.
-        $scope.loadMore = function() { console.log('loadMore')
+        $scope.loadMore = function() {
             if (!$scope.inProgress) {
                 $scope.inProgress = 1;
                 if ($scope.totalResults / 10 > $scope.pageNumber) {
+                    $scope.searchResults.Search.push(loader);
                     $scope.fetchData(1);
                 }
             }
